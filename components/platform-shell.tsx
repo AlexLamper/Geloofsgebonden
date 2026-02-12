@@ -16,10 +16,10 @@ export function PlatformShell({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <SidebarProvider style={{ height: "100vh", overflow: "hidden" }}>
-      <div className="flex w-full bg-background text-foreground selection:bg-primary/20 h-full">
+    <SidebarProvider>
+      <div className="flex w-full bg-background text-foreground selection:bg-primary/20 h-screen overflow-hidden">
         <AppSidebar />
-        <sidebarinset className="flex flex-col bg-background h-full overflow-hidden">
+        <SidebarInset className="flex flex-col bg-background h-full overflow-hidden">
           <header className="hidden md:flex h-16 shrink-0 items-center gap-2 border-b bg-background/95 backdrop-blur-sm px-4 sticky top-0 z-10">
              {/* Header content if any */}
           </header>
