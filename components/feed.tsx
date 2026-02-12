@@ -5,11 +5,8 @@ import { useSession } from "next-auth/react";
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import {
-  Bell,
   BookOpen,
-  Bookmark,
   Calendar,
-  Clock,
   Flame,
   Heart,
   Search,
@@ -18,7 +15,7 @@ import {
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CreatePostDialog, FeedPost } from "@/components/create-post-dialog";
@@ -73,7 +70,7 @@ export function Feed({
     text: string;
   } | null;
 }) {
-  const { data: session } = useSession();
+  useSession();
   const [posts, setPosts] = useState<FeedPost[]>(initialPosts);
   const [tab, setTab] = useState("for-you");
   const [search, setSearch] = useState("");
@@ -173,7 +170,7 @@ export function Feed({
         {/* Trending Cards Grid */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {trendingPosts.map((post, idx) => (
-            <Card key={post._id} className="group relative overflow-hidden rounded-3xl border-none shadow-sm transition-all hover:shadow-md h-[280px] hover:cursor-pointer">
+            <Card key={post._id} className="group relative overflow-hidden rounded-3xl border-none shadow-sm transition-all hover:shadow-md h-70 hover:cursor-pointer">
               <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent z-10" />
               <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/30 transition-colors" />
               

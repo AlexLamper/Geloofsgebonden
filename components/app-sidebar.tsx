@@ -4,16 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import {
-  BookOpen,
   Bookmark,
-  Clock,
-  Download,
   Flame,
   HelpCircle,
   Home,
   LayoutGrid,
   LogOut,
-  MessageSquare,
   Settings,
   Users,
 } from "lucide-react";

@@ -53,7 +53,7 @@ export default function RegistrerenPage() {
 
   return (
     <main className="flex min-h-[calc(100vh-4rem)] items-center justify-center bg-gray-50/50 p-4 dark:bg-background">
-      <div className="grid w-full max-w-5xl overflow-hidden rounded-[2rem] border bg-card shadow-2xl lg:grid-cols-2">
+      <div className="grid w-full max-w-5xl overflow-hidden rounded-4xl border bg-card shadow-2xl lg:grid-cols-2">
         
         {/* Brand Panel */}
         <section className="relative hidden flex-col justify-between bg-zinc-50 p-10 lg:flex overflow-hidden">
