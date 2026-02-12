@@ -102,7 +102,7 @@ export const { handlers, auth } = NextAuth({
         session.user.id = typeof token.userId === "string" ? token.userId : "";
         session.user.pseudonym =
           typeof token.pseudonym === "string" ? token.pseudonym : "";
-        session.user.role = typeof token.role === "string" ? token.role : "user";
+        session.user.role = (typeof token.role === "string" ? token.role : "user") as "user" | "admin";
         session.user.name =
           typeof token.pseudonym === "string" ? token.pseudonym : "Anonieme_Ziel";
       }

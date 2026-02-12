@@ -1,12 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ShieldCheck } from "lucide-react";
 
 import { AppSidebar } from "@/components/app-sidebar";
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { Button } from "@/components/ui/button";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 const authRoutes = ["/inloggen", "/registreren"];
 

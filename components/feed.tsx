@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
@@ -283,7 +284,7 @@ export function Feed({
                   </div>
                 </div>
                 <div className="size-16 overflow-hidden rounded-xl shrink-0">
-                  <img src={pick.image} className="h-full w-full object-cover" alt="pick" />
+                  <Image src={pick.image} className="h-full w-full object-cover" alt="pick" width={64} height={64} />
                 </div>
               </div>
             ))}
