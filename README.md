@@ -1,1 +1,1 @@
-Een platform om anoniem Christelijke vragen te stellen en gebeds of dankpunten te delen. 
+Een Christelijke platform waar je anoniem vragen kunt stellen, antwoorden kunt geven, in gesprek kunt gaan over het geloof, en gebeds + dankpunten kunt delen.
