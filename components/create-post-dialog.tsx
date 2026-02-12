@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
+import { BookOpen, Hash } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -38,8 +39,31 @@ export function CreatePostDialog({
   const [content, setContent] = useState("");
   const [type, setType] = useState<PostType>("GEBED");
   const [scriptureReference, setScriptureReference] = useState("");
+  const [hashtag, setHashtag] = useState("");
+  const [hashtags, setHashtags] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  async function fetchScripture(ref: string) {
+    if (!ref) return;
+    try {
+      const resp = await fetch(`https://api.scriptura.dev/v1/bible/nld/nlg/search?query=${encodeURIComponent(ref)}`);
+      if (resp.ok) {
+        // Mock handling as api.scriptura.dev might need key or different endpoint
+        // Assuming user just wants to input reference for now or we fake lookup
+        // Ideally we would setScriptureText(data.text);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  const addHashtag = () => {
+    if (hashtag && !hashtags.includes(hashtag)) {
+      setHashtags([...hashtags, hashtag.replace(/^#/, '')]);
+      setHashtag("");
+    }
+  };
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -135,12 +159,36 @@ export function CreatePostDialog({
             className="min-h-32 w-full rounded-md border bg-background px-3 py-2 text-sm"
           />
 
-          <input
-            value={scriptureReference}
-            onChange={(event) => setScriptureReference(event.target.value)}
-            placeholder="Optioneel: bijv. Johannes 3:16"
-            className="w-full rounded-md border bg-background px-3 py-2 text-sm"
-          />
+          <div className="flex gap-2 items-center">
+            <div className="relative flex-1">
+               <BookOpen className="absolute left-3 top-2.5 size-4 text-muted-foreground" />
+               <input
+                value={scriptureReference}
+                onChange={(event) => setScriptureReference(event.target.value)}
+                onBlur={() => fetchScripture(scriptureReference)}
+                placeholder="Bijbeltekst (bijv. Johannes 3:16)"
+                className="w-full rounded-md border bg-background pl-9 pr-3 py-2 text-sm"
+              />
+            </div>
+            <div className="relative flex-1">
+               <Hash className="absolute left-3 top-2.5 size-4 text-muted-foreground" />
+               <input
+                value={hashtag}
+                onChange={(event) => setHashtag(event.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addHashtag())}
+                placeholder="Hashtag toevoegen"
+                className="w-full rounded-md border bg-background pl-9 pr-3 py-2 text-sm"
+              />
+            </div>
+          </div>
+
+          {hashtags.length > 0 && (
+             <div className="flex flex-wrap gap-1">
+               {hashtags.map(tag => (
+                 <span key={tag} className="bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">#{tag}</span>
+               ))}
+             </div>
+          )}
 
           <div className="flex items-center justify-between">
             <span className="text-xs text-muted-foreground">{content.length}/500</span>

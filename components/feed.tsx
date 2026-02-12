@@ -87,7 +87,6 @@ export function Feed({
     return result;
   }, [posts, search]);
 
-  const trendingPosts = filtered.slice(0, 2);
   const regularPosts = filtered.slice(2);
 
   return (
@@ -96,22 +95,6 @@ export function Feed({
       {/* Middle Column */}
       <div className="space-y-6">
         
-        {/* Subscribe Banner */}
-        <div className="flex items-center justify-between rounded-2xl bg-zinc-900 px-6 py-4 text-white">
-          <div className="flex items-center gap-4">
-            <div className="flex size-10 items-center justify-center rounded-full bg-white/10">
-               <Flame className="size-6 text-primary" />
-            </div>
-            <div>
-              <p className="text-sm font-semibold">Geloofsgebonden Premium</p>
-              <p className="text-xs text-zinc-400">Steun de community en krijg toegang tot extra middelen.</p>
-            </div>
-          </div>
-          <Button variant="outline" className="rounded-full bg-white text-black hover:bg-zinc-200 border-none transition-all px-6 hover:cursor-pointer">
-            Word Donateur
-          </Button>
-        </div>
-
         {/* Search & Tabs Row */}
         <div className="space-y-4">
           <div className="flex items-center gap-4">
@@ -167,35 +150,6 @@ export function Feed({
           </div>
         </div>
 
-        {/* Trending Cards Grid */}
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          {trendingPosts.map((post, idx) => (
-            <Card key={post._id} className="group relative overflow-hidden rounded-3xl border-none shadow-sm transition-all hover:shadow-md h-70 hover:cursor-pointer">
-              <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent z-10" />
-              <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/30 transition-colors" />
-              
-              <div className="absolute top-4 left-4 z-20">
-                <Badge className="bg-white/20 backdrop-blur-md border-none text-white rounded-full px-3 py-1 flex items-center gap-1.5 text-xs font-semibold">
-                  <TrendingUp className="size-3 text-primary-foreground" />
-                  Trending #{idx + 1}
-                </Badge>
-              </div>
-              <div className="absolute bottom-6 left-6 right-6 z-20 text-white">
-                 <div className="flex items-center gap-2 mb-2">
-                    <Avatar className="size-6 border border-white/20">
-                      <AvatarImage src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${post.authorPseudonym}`} />
-                      <AvatarFallback>{post.authorPseudonym[0]}</AvatarFallback>
-                    </Avatar>
-                    <span className="text-[10px] font-medium text-white/90">{post.authorPseudonym} • {post.type}</span>
-                 </div>
-                 <h3 className="text-lg font-bold leading-tight mb-2">
-                   {post.content.length > 80 ? post.content.slice(0, 80) + "..." : post.content}
-                 </h3>
-              </div>
-            </Card>
-          ))}
-        </div>
-
         {/* Regular Posts List */}
         <div className="space-y-6">
            {regularPosts.map((post) => (
@@ -244,49 +198,19 @@ export function Feed({
         
         {/* Daily Verse / Scripture Focus */}
         {dailyVerse && (
-          <div className="rounded-3xl bg-primary px-6 py-6 text-white shadow-sm shadow-primary/20">
-             <div className="flex items-center gap-2 mb-3 text-white/80">
+          <div className="rounded-3xl bg-white px-6 py-6 text-amber-900 shadow-sm border border-gray-100">
+             <div className="flex items-center gap-2 mb-3 text-amber-900/60">
                 <BookOpen className="size-4" />
                 <span className="text-[10px] font-bold uppercase tracking-widest">Dagtekst</span>
              </div>
-             <p className="font-serif italic text-lg leading-relaxed">
+             <p className="font-serif italic text-lg leading-relaxed text-amber-950">
                “{dailyVerse.text}”
              </p>
-             <p className="mt-3 text-right text-xs font-bold text-white/90">
+             <p className="mt-3 text-right text-xs font-bold text-amber-900/80">
                 — {dailyVerse.reference}
              </p>
           </div>
         )}
-
-        {/* Curated Picks */}
-        <div className="rounded-3xl bg-white p-6 shadow-sm border border-zinc-100">
-          <h3 className="mb-6 text-lg font-bold text-zinc-900">Aanbevolen Artikelen</h3>
-          <div className="space-y-6">
-            {curatedPicks.map((pick, i) => (
-              <div key={i} className="flex gap-4">
-                <div className="flex-1 space-y-2">
-                  <div className="flex items-center gap-1.5 text-[10px] font-bold text-zinc-400 uppercase tracking-wider">
-                     <Avatar className="size-3.5">
-                       <AvatarImage src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${pick.author}`} />
-                       <AvatarFallback>A</AvatarFallback>
-                     </Avatar>
-                     {pick.author} • {pick.category}
-                  </div>
-                  <h4 className="text-sm font-bold leading-tight text-zinc-900 line-clamp-2 hover:text-primary cursor-pointer transition-colors">
-                    {pick.title}
-                  </h4>
-                  <div className="flex items-center gap-3 pt-1 text-[10px] font-medium text-zinc-400">
-                     <span>{pick.date}</span>
-                     <span>{pick.readTime}</span>
-                  </div>
-                </div>
-                <div className="size-16 overflow-hidden rounded-xl shrink-0">
-                  <Image src={pick.image} className="h-full w-full object-cover" alt="pick" width={64} height={64} />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
 
         {/* Categories */}
         <div className="rounded-3xl bg-white p-6 shadow-sm border border-zinc-100">

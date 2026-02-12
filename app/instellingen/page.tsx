@@ -19,14 +19,14 @@ export default function SettingsPage() {
   const { data: session } = useSession();
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 pb-12">
-      <div>
+    <div className="max-w-2xl mx-auto space-y-8 pb-12 w-full flex flex-col items-center">
+      <div className="w-full text-center md:text-left">
         <h1 className="text-3xl font-bold tracking-tight text-zinc-900">Instellingen</h1>
         <p className="text-zinc-500">Beheer je account en voorkeuren voor Geloofsgebonden.</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-8">
-        {/* Navigation Sidebar */}
+      <div className="w-full space-y-8">
+        {/* Profile */}
         <div className="space-y-1">
           {[
             { label: "Account", icon: User, active: true },

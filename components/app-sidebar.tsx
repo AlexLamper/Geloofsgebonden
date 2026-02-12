@@ -13,7 +13,7 @@ import {
   Settings,
   Users,
 } from "lucide-react";
-
+import { Button } from "@/components/ui/button";
 import {
   Sidebar,
   SidebarContent,
@@ -23,7 +23,6 @@ import {
   SidebarMenuButton,
   SidebarGroup,
 } from "@/components/ui/sidebar";
-import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 
@@ -105,33 +104,26 @@ export function AppSidebar() {
 
         <div className="my-4 h-px bg-sidebar-border/60 mx-4" />
 
-        <SidebarGroup>
-          <SidebarMenu>
-            {secondaryItems.map((item) => (
-              <SidebarMenuButton 
-                key={item.label} 
-                asChild 
-                isActive={pathname === item.href}
-                className={cn(
-                  "h-11 rounded-xl px-4 transition-all hover:cursor-pointer",
-                  pathname === item.href 
-                    ? "bg-primary text-white hover:bg-primary hover:text-white shadow-sm" 
-                    : "hover:bg-sidebar-accent"
-                )}
-              >
-                <Link href={item.href} className="flex items-center gap-3">
-                  <item.icon className={cn("size-5", pathname === item.href ? "text-white" : "text-muted-foreground")} />
-                  <span className={cn("text-sm font-medium", pathname === item.href ? "text-white font-bold" : "text-foreground")}>{item.label}</span>
-                </Link>
-              </SidebarMenuButton>
-            ))}
-          </SidebarMenu>
-        </SidebarGroup>
       </SidebarContent>
 
       <SidebarFooter className="p-3">
+        {session?.user && (
+          <div className="mb-4 px-4 py-2 flex items-center gap-3">
+            <div className="size-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold overflow-hidden">
+               {session.user.image ? <img src={session.user.image} alt="User" /> : session.user.name?.[0] || "U"}
+            </div>
+            <div className="flex flex-col">
+              <span className="text-sm font-bold text-foreground">{session.user.name || "Gebruiker"}</span>
+              <span className="text-xs text-muted-foreground">{session.user.email}</span>
+            </div>
+            <Button variant="ghost" size="icon" className="ml-auto size-8 text-muted-foreground hover:text-destructive" onClick={() => signOut()}>
+              <LogOut className="size-4" />
+            </Button>
+          </div>
+        )}
+
         <SidebarMenu>
-          {bottomItems.map((item) => (
+          {[...secondaryItems, ...bottomItems].map((item) => (
             <SidebarMenuButton 
               key={item.label} 
               asChild 
