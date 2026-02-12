@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useMemo, useState, Suspense } from "react";
 import { signIn } from "next-auth/react";
 import { ShieldCheck, Mail, Lock, UserPlus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-export default function RegistrerenPage() {
+function RegisterContent() {
   const params = useSearchParams();
   const suggestedEmail = useMemo(() => params.get("email") ?? "", [params]);
 
@@ -52,8 +52,7 @@ export default function RegistrerenPage() {
   }
 
   return (
-    <main className="flex min-h-[calc(100vh-4rem)] items-center justify-center bg-gray-50/50 p-4 dark:bg-background">
-      <div className="grid w-full max-w-5xl overflow-hidden rounded-4xl border bg-card shadow-2xl lg:grid-cols-2">
+    <div className="grid w-full max-w-5xl overflow-hidden rounded-4xl border bg-card shadow-2xl lg:grid-cols-2">
         
         {/* Brand Panel */}
         <section className="relative hidden flex-col justify-between bg-zinc-50 p-10 lg:flex overflow-hidden">
@@ -148,6 +147,15 @@ export default function RegistrerenPage() {
           </p>
         </section>
       </div>
+  );
+}
+
+export default function RegistrerenPage() {
+  return (
+    <main className="flex min-h-[calc(100vh-4rem)] items-center justify-center bg-gray-50/50 p-4 dark:bg-background">
+      <Suspense fallback={<div className="text-muted-foreground">Laden...</div>}>
+         <RegisterContent />
+      </Suspense>
     </main>
   );
 }
