@@ -1,17 +1,14 @@
 "use client";
 
-import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import {
   BookOpen,
   Calendar,
-  Flame,
   Heart,
   Search,
   Share2,
-  TrendingUp,
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -28,25 +25,6 @@ const filterTags = [
   "#Dankbaarheid",
   "#Getuigenis",
   "#Geloofsvragen",
-];
-
-const curatedPicks = [
-  {
-    author: "Ds. van Dijk",
-    category: "Theologie",
-    title: "De betekenis van de Psalmen in het dagelijks leven",
-    date: "12 Feb 2026",
-    readTime: "5 min",
-    image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=200&h=200&auto=format&fit=crop",
-  },
-  {
-    author: "Zuster Maria",
-    category: "Gebed",
-    title: "Hoe stilte de stem van God versterkt",
-    date: "11 Feb 2026",
-    readTime: "3 min",
-    image: "https://images.unsplash.com/photo-1519834125748-958cf085b736?q=80&w=200&h=200&auto=format&fit=crop",
-  },
 ];
 
 const categories = [
