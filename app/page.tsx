@@ -3,6 +3,12 @@ import { connectToDatabase } from "@/lib/db";
 import { mockPosts } from "@/src/lib/mock-posts";
 import { fetchDayText } from "@/src/lib/scriptura";
 import Post from "@/src/models/Post";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Feed | Geloofsgebonden - Deel je gebeden en dankbaarheid",
+  description: "Blijf op de hoogte van de Geloofsgebonden community. Lees gebeden, deel je eigen dankbaarheid en reageer op vragen van anderen.",
+};
 
 export const dynamic = "force-dynamic";
 
@@ -23,7 +29,7 @@ export default async function Home() {
 
   try {
     await connectToDatabase();
-    const dbPosts = await Post.find({ status: { $in: ["PENDING", "APPROVED"] } })
+    const dbPosts = await Post.find({})
       .sort({ createdAt: -1 })
       .limit(100)
       .lean();

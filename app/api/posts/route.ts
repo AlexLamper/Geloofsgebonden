@@ -30,9 +30,7 @@ export async function GET(request: NextRequest) {
   await connectToDatabase();
 
   const type = request.nextUrl.searchParams.get("type") as PostType | "ALLES" | null;
-  const filter: Record<string, unknown> = {
-    status: { $in: ["APPROVED", "PENDING"] },
-  };
+  const filter: Record<string, unknown> = {};
 
   if (type && type !== "ALLES") {
     filter.type = type;

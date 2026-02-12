@@ -1,5 +1,11 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Categorieën | Geloofsgebonden - Vind gebedspunten per thema",
+  description: "Ontdek verschillende categorieën op Geloofsgebonden, van gebed en dankzegging tot bijbelstudie en getuigenissen.",
+};
 
 const categories = [
   "Gebed", "Dankzegging", "Vragen",

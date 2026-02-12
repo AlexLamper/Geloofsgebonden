@@ -65,13 +65,14 @@ export function Feed({
     return result;
   }, [posts, search]);
 
-  const regularPosts = filtered.slice(2);
+  const regularPosts = filtered;
 
   return (
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_340px]">
       
       {/* Middle Column */}
       <div className="space-y-6">
+        <h1 className="sr-only">Geloofsgebonden Feed - Christelijke Gebeden en Vragen</h1>
         
         {/* Search & Tabs Row */}
         <div className="space-y-4">
